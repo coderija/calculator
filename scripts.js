@@ -81,11 +81,15 @@ function chooseOperator(op) {
 function calculate(){
     if (firstNumber !== '' && operation !== null && secondNumber !==''){
         const result = operate(operation, firstNumber, secondNumber);
-        currentDisplay(result);
+        if (result === null){
+            currentDisplay('Error');
 
-        firstNumber = String(result);
-        operation = null;
-        secondNumber = '';
+            firstNumber = String(result);
+            operation = null;
+            secondNumber = '';
+            return;
+        }
+        currentDisplay(result);
     }
     
 }
