@@ -78,18 +78,23 @@ function chooseOperator(op) {
     operation = op;
   }
 
+//handle equal button functionality
 function calculate(){
     if (firstNumber !== '' && operation !== null && secondNumber !==''){
         const result = operate(operation, firstNumber, secondNumber);
         if (result === null){
             currentDisplay('Error');
 
-            firstNumber = String(result);
+            firstNumber ='';
             operation = null;
             secondNumber = '';
             return;
         }
         currentDisplay(result);
+        firstNumber =String(result);
+        operation = null;
+        secondNumber = '';
     }
+       
     
 }
