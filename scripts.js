@@ -1,6 +1,7 @@
 let firstNumber ='';
 let operation = null;
 let secondNumber = '';
+let isShowigResult = false;
 
 const numberButtons = document.querySelectorAll('[data-number]');
 const display = document.getElementById('current');
@@ -63,19 +64,26 @@ function currentDisplay(num){
 
 //add digit to a number & check if the there's a result on the screen
 function appendDigit(aDigit) {
-    if (operation === null){
-        firstNumber += aDigit;
-        currentDisplay(firstNumber);
+    if(isShowigResult === true){
+        firstNumber = '';
+        isShowigResult = false;
     }
+
+    if(operation === null ){
+        firstNumber = firstNumber + aDigit;
+        currentDisplay(firstNumber);
+    
+    }
+    
     else {
-        secondNumber += aDigit;
-        currentDisplay(secondNumber);
+     secondNumber = secondNumber + aDigit
+     currentDisplay(secondNumber);
     }
   }
-
   //handle operators when clicked
 function chooseOperator(op) {
     operation = op;
+    isShowigResult = false;
   }
 
 //handle equal button functionality
@@ -91,9 +99,10 @@ function calculate(){
             return;
         }
         currentDisplay(result);
-        firstNumber =String(result);
+        firstNumber = String(result);
         operation = null;
         secondNumber = '';
+        isShowigResult = true;
     }
        
     
