@@ -55,8 +55,8 @@ function operate (operator,a, b){
 }
 //a function that writes to the screen
 function currentDisplay(num){
-    if (num === '' || num === ' ' || num === '0'){
-        display.textContent = '0';
+    if (num === 0){
+        display.textContent = 0;
     } else{
         display.textContent = num;
     }
@@ -82,6 +82,13 @@ function appendDigit(aDigit) {
   }
   //handle operators when clicked
 function chooseOperator(op) {
+    if(firstNumber=== ''){
+        return;
+    }
+    if(operation !== null && secondNumber !==''){
+        calculate();
+
+    }
     operation = op;
     isShowigResult = false;
   }
@@ -104,6 +111,4 @@ function calculate(){
         secondNumber = '';
         isShowigResult = true;
     }
-       
-    
 }
