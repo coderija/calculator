@@ -72,16 +72,24 @@ function appendDigit(aDigit) {
     }
 
     if(operation === null ){
-        firstNumber = firstNumber + aDigit;
+        firstNumber = addToNumber(firstNumber, aDigit);
         currentDisplay(firstNumber);
     
     }
     
     else {
-     secondNumber = secondNumber + aDigit
+     secondNumber = addToNumber(secondNumber, aDigit);
      currentDisplay(secondNumber);
     }
   }
+  //a helper to fix the multiple leading zeros
+  function addToNumber(current, digit){
+    if(current === '0'){
+        return digit;
+    }
+    return current + digit;
+  }
+
   //handle operators when clicked and operation chaining
 function chooseOperator(op) {
     if(firstNumber=== ''){
