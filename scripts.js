@@ -7,6 +7,7 @@ const numberButtons = document.querySelectorAll('[data-number]');
 const display = document.getElementById('current');
 const operationButtons = document.querySelectorAll('[data-operator]');
 const equalButton = document.querySelector('[data-action="equals"]');
+const clearButton = document.getElementById('clear');
 
 //event listeners
 numberButtons.forEach((button)=> button.addEventListener('click',() => 
@@ -14,6 +15,7 @@ numberButtons.forEach((button)=> button.addEventListener('click',() =>
 operationButtons.forEach((button) => button.addEventListener('click', ()=>
                 chooseOperator(button.dataset.operator) ));
 equalButton.addEventListener('click',calculate);
+clearButton.addEventListener('click', clear);
 
 //basic math functions
 function add(a,b){
@@ -80,14 +82,17 @@ function appendDigit(aDigit) {
      currentDisplay(secondNumber);
     }
   }
-  //handle operators when clicked
+  //handle operators when clicked and operation chaining
 function chooseOperator(op) {
     if(firstNumber=== ''){
         return;
     }
     if(operation !== null && secondNumber !==''){
         calculate();
-
+        //check if the first number is valid
+        if (firstNumber ===''){
+            return;
+        }
     }
     operation = op;
     isShowigResult = false;
@@ -111,4 +116,12 @@ function calculate(){
         secondNumber = '';
         isShowigResult = true;
     }
+}
+//clear numbers and operations
+function clear(){
+    currentDisplay(0);
+    firstNumber = '';
+    operation = null;
+    secondNumber = '';
+    isShowigResult = false;
 }
