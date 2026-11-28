@@ -8,6 +8,8 @@ const display = document.getElementById('current');
 const operationButtons = document.querySelectorAll('[data-operator]');
 const equalButton = document.querySelector('[data-action="equals"]');
 const clearButton = document.getElementById('clear');
+const decimalButton = document.querySelector('[data-action= "decimal"]');
+
 
 //event listeners
 numberButtons.forEach((button)=> button.addEventListener('click',() => 
@@ -16,6 +18,7 @@ operationButtons.forEach((button) => button.addEventListener('click', ()=>
                 chooseOperator(button.dataset.operator) ));
 equalButton.addEventListener('click',calculate);
 clearButton.addEventListener('click', clear);
+decimalButton.addEventListener('click', appendPoint);
 
 //basic math functions
 function add(a,b){
@@ -105,8 +108,34 @@ function chooseOperator(op) {
     operation = op;
     isShowigResult = false;
   }
+  
+//a helper function to handle decimal button 
+function addPoint(current) {
+    if (current.includes('.')) {
+        return current;
+    }
+    if (current === ''){
+        return '0.';
+    }
+    return current += '.';
+  }
 
-//handle equal button functionality
+  function appendPoint() {
+    if (isShowigResult === true){
+        firstNumber = '';
+        isShowigResult = false;
+    }
+    if (operation === null){
+        firstNumber = addPoint(firstNumber);
+        currentDisplay(firstNumber);
+    }
+    else {
+        secondNumber = addPoint(secondNumber);
+        currentDisplay(secondNumber);
+    }
+    }
+
+//handle equal button 
 function calculate(){
     if (firstNumber !== '' && operation !== null && secondNumber !==''){
         const result = operate(operation, firstNumber, secondNumber);
